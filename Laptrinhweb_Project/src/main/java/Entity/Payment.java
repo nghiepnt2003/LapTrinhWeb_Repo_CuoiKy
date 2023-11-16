@@ -10,15 +10,15 @@ public class Payment {
     private Long id;
     @OneToOne
     private Order order;
-    private boolean paid;
-    private double total;
+    private Boolean paid;
+    private Double total;
     private String detail;
 
 
     public Payment() {
     }
 
-    public Payment(Order order, boolean paid, double total, String detail) {
+    public Payment(Order order, Boolean paid, Double total, String detail) {
         this.order = order;
         this.paid = paid;
         this.total = total;
@@ -33,19 +33,19 @@ public class Payment {
         this.order = order;
     }
 
-    public boolean isPaid() {
+    public Boolean isPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         this.paid = paid;
     }
 
-    public double getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

@@ -9,13 +9,13 @@ public class OrderDetail {
     private Long id;
     @ManyToOne(fetch=FetchType.EAGER)
     private Product product;
-    private int quantity;
+    private Long quantity;
 
 
     public OrderDetail() {
     }
 
-    public OrderDetail(Product product, int quantity) {
+    public OrderDetail(Product product, Long quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -28,11 +28,11 @@ public class OrderDetail {
         this.product = product;
     }
 
-    public int getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 

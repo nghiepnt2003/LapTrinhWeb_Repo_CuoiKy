@@ -16,7 +16,7 @@ public class Product {
     private String productImage;
     private String color;
     private int size;
-    private double productCost;
+    private Double productCost;
     private String description;
     @ManyToOne()
     private Category category;
@@ -26,7 +26,7 @@ public class Product {
     }
 
 
-    public Product(String productName, String brand, String productImage, String color, int size, double productCost, String description, Category category) {
+    public Product(String productName, String brand, String productImage, String color, int size, Double productCost, String description, Category category) {
         this.productName = productName;
         this.brand = brand;
         this.productImage = productImage;
@@ -69,11 +69,11 @@ public class Product {
         this.size = size;
     }
 
-    public double getProductCost() {
+    public Double getProductCost() {
         return productCost;
     }
 
-    public void setProductCost(double productCost) {
+    public void setProductCost(Double productCost) {
         this.productCost = productCost;
     }
 

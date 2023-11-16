@@ -25,18 +25,31 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manager Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hello Alias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Login.jsp">Login</a>
-                </li>
+                <c:if test="${sessionScope.acc.isAdmin()})">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Manager Account </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Manager Product</a>
+                    </li>
+                </c:if>
+
+
+
+                <c:if test="${sessionScope.acc != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hello  ${sessionScope.acc.userName}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.acc == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.jsp">Login</a>
+                    </li>
+                </c:if>
+
             </ul>
 
             <form action="search" method="post" class="form-inline my-2 my-lg-0">
@@ -104,17 +117,17 @@
                 <c:forEach items="${listP}" var="o">
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card">
-                        block">Add to cart</a>
-                                    </div>    <img class="card-img-top" src="${o.productImage}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
-                                        <p class="card-text show_txt">${o.title}</p>
-                                        <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">${o.productCost} $</p>
-                                            </div>
-                                            <div class="col">
-                                                <a href="#" class="btn btn-success btn-
+                            <img class="card-img-top" src="${o.productImage}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
+                                <p class="card-text show_txt">${o.title}</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="btn btn-danger btn-block">${o.productCost} $</p>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -20,6 +20,8 @@ public class SignupServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+
         String user = req.getParameter("user");
         String pass = req.getParameter("pass");
         String repass = req.getParameter("repass");

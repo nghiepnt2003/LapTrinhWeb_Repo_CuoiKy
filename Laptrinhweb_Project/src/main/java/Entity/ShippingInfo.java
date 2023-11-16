@@ -8,7 +8,7 @@ public class ShippingInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double shippingCost;
+    private Double shippingCost;
     private String shippingType;
     private String shippingAddress;
 

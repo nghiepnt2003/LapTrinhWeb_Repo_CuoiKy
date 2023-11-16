@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Order")
+@Table(name = "\"Order\"")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Order {
     @ManyToOne()
     private Customer customer;
 
-    private int totalQuantity;
+    private Long totalQuantity;
     private Date orderDate;
     private Date deliveryData;
     private String deliveryStatus;
@@ -26,7 +26,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Customer customer, int totalQuantity, Date orderDate, Date deliveryData, String deliveryStatus) {
+    public Order(Customer customer, Long totalQuantity, Date orderDate, Date deliveryData, String deliveryStatus) {
         this.customer = customer;
         this.totalQuantity = totalQuantity;
         this.orderDate = orderDate;
@@ -43,11 +43,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public int getTotalQuantity() {
+    public Long getTotalQuantity() {
         return totalQuantity;
     }
 
-    public void setTotalQuantity(int totalQuantity) {
+    public void setTotalQuantity(Long totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 
