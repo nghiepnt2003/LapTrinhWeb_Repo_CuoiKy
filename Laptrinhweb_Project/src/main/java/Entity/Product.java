@@ -18,7 +18,7 @@ public class Product {
     private int size;
     private double productCost;
     private String description;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne()
     private Category category;
 
 

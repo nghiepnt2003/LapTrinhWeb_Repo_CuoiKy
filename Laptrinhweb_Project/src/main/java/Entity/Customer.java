@@ -11,6 +11,7 @@ public class Customer {
     private String phone;
     private String mail;
     private String deliveryAddress;
+    ////////////////////////////
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private Account account;
 

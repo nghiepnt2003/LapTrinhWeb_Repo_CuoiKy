@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class OrderDetail {
     @Id
     private Long id;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER)
     private Product product;
     private int quantity;
 
