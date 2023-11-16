@@ -3,6 +3,7 @@ package Entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="OrderDetail")
 public class OrderDetail {
     @Id
     private Long id;
