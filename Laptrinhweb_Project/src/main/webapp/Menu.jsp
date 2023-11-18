@@ -10,34 +10,36 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-                <c:if test="${sessionScope.acc.isAdmin == 1}">
+                <c:if test="${sessionScope.acc.isAdmin()}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manager Account</a>
+                        <a class="nav-link" href="#">Manager Account </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Manager Product</a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.acc.isSell == 1}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="manager">Manager Product</a>
-                    </li>
-                </c:if>
+
+
+
                 <c:if test="${sessionScope.acc != null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hello ${sessionScope.acc.user}</a>
+                        <a class="nav-link" href="#">Hello ${sessionScope.acc.userName}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout">Logout</a>
-                    </li> 
+                    </li>
                 </c:if>
                 <c:if test="${sessionScope.acc == null}">
                     <li class="nav-item">
                         <a class="nav-link" href="Login.jsp">Login</a>
                     </li>
                 </c:if>
+
             </ul>
 
             <form action="search" method="post" class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
-                    <input oninput="searchByName(this)" value="${txtS}" name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <input name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>

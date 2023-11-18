@@ -99,4 +99,18 @@ public class ProductDB {
             em.close();
         }
     }
+    public static Product getProductByID(int id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT p FROM Product p WHERE p.id = :id";
+        TypedQuery<Product> q = em.createQuery(qString, Product.class);
+        q.setParameter("id",id);
+        try {
+            Product products = q.getSingleResult();
+            return products;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 }
