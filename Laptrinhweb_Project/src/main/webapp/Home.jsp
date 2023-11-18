@@ -25,7 +25,7 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-                <c:if test="${sessionScope.acc.isAdmin()})">
+                <c:if test="${sessionScope.acc.isAdmin()}">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Manager Account </a>
                     </li>
@@ -38,7 +38,7 @@
 
                 <c:if test="${sessionScope.acc != null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hello  ${sessionScope.acc.userName}</a>
+                        <a class="nav-link" href="#">Hello ${sessionScope.acc.userName}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout">Logout</a>
@@ -101,6 +101,7 @@
 
                 </ul>
             </div>
+<%--            Last Product đặt đây            --%>
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase">Last product</div>
                 <div class="card-body">

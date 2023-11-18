@@ -1,14 +1,76 @@
 package EntityDB;
 
 import DBUtil.DBUtil;
+import Entity.Account;
 import Entity.Product;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
 public class ProductDB {
+    public static void insert(Product product) {
+
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.persist(product);
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+
+    public static void update(Product product) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.merge(product);
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+    public static void delete(Product product) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.remove(em.merge(product));
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+    // Lấy ra sản phẩm mới nhất
+    public static Product getLastProduct(){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT p FROM Product p ORDER BY p.id DESC";
+        TypedQuery<Product> q = em.createQuery(qString, Product.class);
+        q.setMaxResults(1);
+        try {
+            Product lastProduct = q.getSingleResult();
+            return lastProduct;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
     public static List<Product> getAllProduct() {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT p FROM Product p";

@@ -23,7 +23,14 @@ public class HomeServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         ProductDB productDB = new ProductDB();
         List<Product> productList = productDB.getAllProduct();
+        Product productLast = productDB.getLastProduct();
+
+
+
         req.setAttribute("listP",productList);
+
+
+        // Chuyển dữ liệu đến trang Home.jsp
         req.getRequestDispatcher("Home.jsp").forward(req,resp);
     }
 }

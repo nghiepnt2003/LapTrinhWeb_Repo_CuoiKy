@@ -29,7 +29,7 @@ public class SignupServlet extends HttpServlet {
             req.setAttribute("mess","Account already exists !!!!");
         }else
         if(pass.equals(repass)){
-            Account account = new Account(user,pass,false);
+            Account account = new Account(user,pass,true);
             AccountDB accountDB = new AccountDB();
             accountDB.insert(account);
             req.setAttribute("mess_success","Account registration successful");

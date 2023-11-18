@@ -13,11 +13,11 @@ public class Product {
     private Long id;
     private String productName;
     private String brand;
-    private String productImage;
+    private String productImage;    // tạo data kiếm mấy url có đường dẫn ngắn ngắn, dài quá 255 ký tự là bỏ qua kia lỗi
     private String color;
     private int size;
     private Double productCost;
-    private String description;
+    private String description; // cái này cũng ngắn ngắn hoi, khỏi tiếng việt càng tốt
     @ManyToOne()
     private Category category;
 
