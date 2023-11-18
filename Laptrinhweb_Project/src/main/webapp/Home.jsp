@@ -96,7 +96,7 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
                 <ul class="list-group category_block">
                     <c:forEach items="${listCC}" var="o">
-                        <li class="list-group-item text-white"><a href="#">${o.cname}</a></li>
+                        <li class="list-group-item text-white"><a href="category?cid=${o.id}">${o.name}</a></li>
                     </c:forEach>
 
                 </ul>
@@ -105,10 +105,10 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase">Last product</div>
                 <div class="card-body">
-                    <img class="img-fluid" src="${p.image}" />
-                    <h5 class="card-title">${p.name}</h5>
-                    <p class="card-text">${p.title}</p>
-                    <p class="bloc_left_price">${p.price} $</p>
+                    <img class="img-fluid" src="${productLast.productImage}" />
+                    <h5 class="card-title">${productLast.productName}</h5>
+                    <p class="card-text">${productLast.description}</p>
+                    <p class="bloc_left_price">${productLast.productCost} $</p>
                 </div>
             </div>
         </div>
@@ -121,7 +121,11 @@
                             <img class="card-img-top" src="${o.productImage}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
-                                <p class="card-text show_txt">${o.title}</p>
+                                <p class="card-text show_txt">${o.description}</p>
+                                <p class="card-text show_txt">${o.brand}</p>
+                                <p class="card-text show_txt">${o.color}</p>
+                                <p class="card-text show_txt">${o.size}</p>
+
                                 <div class="row">
                                     <div class="col">
                                         <p class="btn btn-danger btn-block">${o.productCost} $</p>

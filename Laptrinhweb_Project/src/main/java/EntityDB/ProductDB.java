@@ -84,4 +84,20 @@ public class ProductDB {
             em.close();
         }
     }
+
+    public static List<Product> getProductsByCID(String cid) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT p FROM Product p " +
+                "WHERE p.category.id = :cid";
+        TypedQuery<Product> q = em.createQuery(qString, Product.class);
+        q.setParameter("cid",cid);
+        try {
+            List<Product> products = q.getResultList();
+            return products;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 }
