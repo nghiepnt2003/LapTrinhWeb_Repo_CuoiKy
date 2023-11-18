@@ -1,6 +1,8 @@
 package Servlet;
 
+import Entity.Category;
 import Entity.Product;
+import EntityDB.CategoryDB;
 import EntityDB.ProductDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,11 +23,18 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        String CateID = req.getParameter("cid");
+        int CateID = Integer.parseInt(req.getParameter("cid"));
         ProductDB productDB = new ProductDB();
+        CategoryDB categoryDB = new CategoryDB();
         List<Product> productListbyCID = productDB.getProductsByCID(CateID);
+        List<Category> categoryList = categoryDB.getAllCategory();
+        Product productLast = productDB.getLastProduct();
+
 
         req.setAttribute("listP",productListbyCID);
+        req.setAttribute("listCC",categoryList);
+        req.setAttribute("productLast",productLast);
+
         req.getRequestDispatcher("Home.jsp").forward(req,resp);
     }
 }

@@ -85,12 +85,11 @@ public class ProductDB {
         }
     }
 
-    public static List<Product> getProductsByCID(String cid) {
+    public static List<Product> getProductsByCID(int cid) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT p FROM Product p " +
-                "WHERE p.category.id = :cid";
+        String qString = "SELECT p FROM Product p WHERE p.category.id = :categoryId";
         TypedQuery<Product> q = em.createQuery(qString, Product.class);
-        q.setParameter("cid",cid);
+        q.setParameter("categoryId",cid);
         try {
             List<Product> products = q.getResultList();
             return products;
