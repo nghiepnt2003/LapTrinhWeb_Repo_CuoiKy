@@ -84,7 +84,20 @@ public class ProductDB {
             em.close();
         }
     }
-
+    public static List<Product> getProductsByName(String pname) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT p FROM Product p WHERE p.productName like :name ";
+        TypedQuery<Product> q = em.createQuery(qString, Product.class);
+        q.setParameter("name","%" + pname + "%");// Thêm dấu % vào giá trị của tham số
+        try {
+            List<Product> products = q.getResultList();
+            return products;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
     public static List<Product> getProductsByCID(int cid) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT p FROM Product p WHERE p.category.id = :categoryId";

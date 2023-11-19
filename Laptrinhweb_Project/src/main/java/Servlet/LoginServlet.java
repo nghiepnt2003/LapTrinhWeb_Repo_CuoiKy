@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
         String user = req.getParameter("user");
         String pass = req.getParameter("pass");
         Account account = AccountDB.getAccount(user,pass);
+
         if(account != null) {
             // Tạo session
             HttpSession session = req.getSession();
