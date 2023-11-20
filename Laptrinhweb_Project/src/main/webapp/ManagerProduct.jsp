@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+<%--                            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						--%>
                         </div>
                     </div>
                 </div>
@@ -53,6 +53,9 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>Price</th>
+                            <th>Brand</th>
+                            <th>Color</th>
+                            <th>Size</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -66,11 +69,14 @@
                                     </span>
                                 </td>
                                 <td>${o.id}</td>
-                                <td>${o.name}</td>
+                                <td>${o.productName}</td>
                                 <td>
-                                    <img src="${o.image}">
+                                    <img src="${o.productImage}">
                                 </td>
-                                <td>${o.price} $</td>
+                                <td>${o.productCost} $</td>
+                                <td>${o.brand}</td>
+                                <td>${o.color}</td>
+                                <td>${o.size}</td>
                                 <td>
                                     <a href="loadProduct?pid=${o.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                     <a href="delete?pid=${o.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -92,8 +98,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>
-
+            <a href="home"><button type="button" class="btn btn-primary">Back to home</button>
         </div>
         <!-- Edit Modal HTML -->
         <div id="addEmployeeModal" class="modal fade">
@@ -110,17 +115,29 @@
                                 <input name="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <label>Brand</label>
+                                <input name="brand" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Image</label>
                                 <input name="image" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Color</label>
+                                <input name="color" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Size</label>
+                                <input name="size" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
                                 <input name="price" type="text" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Title</label>
-                                <textarea name="title" class="form-control" required></textarea>
-                            </div>
+<%--                            <div class="form-group">--%>
+<%--                                <label>Title</label>--%>
+<%--                                <textarea name="title" class="form-control" required></textarea>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" required></textarea>
@@ -129,7 +146,7 @@
                                 <label>Category</label>
                                 <select name="category" class="form-select" aria-label="Default select example">
                                     <c:forEach items="${listCC}" var="o">
-                                        <option value="${o.cid}">${o.cname}</option>
+                                        <option value="${o.id}">${o.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>

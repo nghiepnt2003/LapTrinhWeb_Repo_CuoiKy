@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("home");
 //            req.getRequestDispatcher("Home.jsp").forward(req, resp);
         }else {
-            req.setAttribute("mess","Account doesn't exist !!!!");
+            req.setAttribute("mess","Wrong User or Password !!!!");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
         }
     }

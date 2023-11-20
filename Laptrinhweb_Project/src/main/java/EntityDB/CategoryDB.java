@@ -72,5 +72,18 @@ public class CategoryDB {
             em.close();
         }
     }
-
+    public static Category getCategoryByID(int id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT c FROM Category c WHERE c.id = :id";
+        TypedQuery<Category> q = em.createQuery(qString, Category.class);
+        q.setParameter("id",id);
+        try {
+            Category category = q.getSingleResult();
+            return category;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 }
