@@ -19,6 +19,11 @@
                     </li>
                 </c:if>
 
+                <c:if test="${sessionScope.acc.isAdmin() == false}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My profile</a>
+                    </li>
+                </c:if>
 
 
                 <c:if test="${sessionScope.acc != null}">
