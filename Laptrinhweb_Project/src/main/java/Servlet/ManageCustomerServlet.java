@@ -1,7 +1,7 @@
 package Servlet;
 
-import Entity.Product;
-import EntityDB.ProductDB;
+import Entity.Customer;
+import EntityDB.CustomerDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,10 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name="delete",value="/delete")
-public class DeleteServlet extends HttpServlet {
-
+@WebServlet(name="managecustomer",value="/managecustomer")
+public class ManageCustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req,resp);
@@ -21,9 +21,11 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        Long pid = Long.parseLong(req.getParameter("pid"));
-        Product product = ProductDB.getProductByID(pid);
-        ProductDB.delete(product);
-        resp.sendRedirect("manageproduct");
+        req.setCharacterEncoding("UTF-8");
+        List<Customer> customerList = CustomerDB.getAllCustomer();
+
+        req.setAttribute("listCus",customerList);
+        req.getRequestDispatcher("ManagerCustomer.jsp").forward(req,resp);
+
     }
 }

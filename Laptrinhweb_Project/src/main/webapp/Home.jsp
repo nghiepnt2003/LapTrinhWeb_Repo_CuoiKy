@@ -51,7 +51,7 @@
                                         <p class="btn btn-danger btn-block">${o.productCost} $</p>
                                     </div>
                                     <div class="col">
-                                        <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                        <a href="addtocart?customerid=${sessionScope.customer.id}&productID=${o.id}" class="btn btn-success btn-block">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +65,8 @@
 </div>
 
 <jsp:include page="Footer.jsp"></jsp:include>
+
+
 </body>
 </html>
 

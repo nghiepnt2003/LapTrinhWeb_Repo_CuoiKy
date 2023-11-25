@@ -24,7 +24,7 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        int pid = Integer.parseInt(req.getParameter("pid"));
+        Long pid = Long.parseLong(req.getParameter("pid"));
         ProductDB productDB = new ProductDB();
         CategoryDB categoryDB = new CategoryDB();
         List<Category> categoryList = categoryDB.getAllCategory();

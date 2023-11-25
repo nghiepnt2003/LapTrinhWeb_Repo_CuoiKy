@@ -1,14 +1,11 @@
 package Servlet;
 
-import Entity.Category;
-import Entity.Product;
-import EntityDB.CategoryDB;
-import EntityDB.ProductDB;
+import DBUtil.CookieUtil;
+import Entity.*;
+import EntityDB.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,12 +20,20 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        ProductDB productDB = new ProductDB();
-        CategoryDB categoryDB = new CategoryDB();
-        List<Product> productList = productDB.getAllProduct();
-        List<Category> categoryList = categoryDB.getAllCategory();
-        Product productLast = productDB.getLastProduct();
 
+        List<Product> productList = ProductDB.getAllProduct();
+        List<Category> categoryList = CategoryDB.getAllCategory();
+        Product productLast = ProductDB.getLastProduct();
+        Cookie[] cookies = req.getCookies();
+        String accountID = CookieUtil.getCookieValue(cookies,"accountID");
+        if(!accountID.isEmpty()){
+            Account account = AccountDB.getAccountByID(Long.parseLong(accountID));
+            Customer customer = CustomerDB.getCustomerByAccount(account);
+            Cart cart = CartDB.getCartByCustomer(customer);
+            HttpSession session = req.getSession();
+            // Đẩy account lên session
+            session.setAttribute("cart",cart);
+        }
 
         req.setAttribute("listCC",categoryList);
         req.setAttribute("listP",productList);

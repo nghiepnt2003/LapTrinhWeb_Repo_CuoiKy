@@ -28,12 +28,12 @@ public class loadProductServlet extends HttpServlet {
         CategoryDB categoryDB = new CategoryDB();
 
         List<Category> categoryList = categoryDB.getAllCategory();
-        int pid = Integer.parseInt(req.getParameter("pid"));
+        Long pid = Long.parseLong(req.getParameter("pid"));
         Product product = ProductDB.getProductByID(pid);
 
         req.setAttribute("detail",product);
         req.setAttribute("listCC",categoryList);
-        req.getRequestDispatcher("Edit.jsp").forward(req,resp);
+        req.getRequestDispatcher("EditProduct.jsp").forward(req,resp);
     }
 
 }

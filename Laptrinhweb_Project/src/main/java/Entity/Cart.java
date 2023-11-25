@@ -8,10 +8,12 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private Long id;
+
+
     // Siêng năng : Truy vấn 1  đối tượng là truy vấn quan hệ ví dụ như trên sẽ truy vấn cartline
     // Lan truyền
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private List<CartLine> cartLines;
     @OneToOne
     private Customer customer;
@@ -32,11 +34,12 @@ public class Cart {
         this.customer = customer;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -56,5 +59,12 @@ public class Cart {
                 '}';
     }
 
-
+    public boolean containsProduct(Product productToCheck) {
+        for (CartLine cartLine : cartLines) {
+            if (cartLine.getProduct().getId() == productToCheck.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,15 +1,18 @@
 package Servlet;
 
+import DBUtil.CookieUtil;
 import Entity.Account;
+import Entity.Cart;
+import Entity.Customer;
 import EntityDB.AccountDB;
+import EntityDB.CartDB;
+import EntityDB.CustomerDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.net.HttpCookie;
 
 @WebServlet(name="login",value="/login")
 public class LoginServlet extends HttpServlet {
@@ -31,9 +34,14 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             // Đẩy account lên session
             session.setAttribute("acc",account);
+            Customer customer = CustomerDB.getCustomerByAccount(account);
+            session.setAttribute("customer",customer);
+            Cookie cookie = new Cookie("accountID",account.getId().toString());
+            cookie.setMaxAge(1000);
+            cookie.setPath("/");
+            resp.addCookie(cookie);
 
-            resp.sendRedirect("home");
-//            req.getRequestDispatcher("Home.jsp").forward(req, resp);
+            req.getRequestDispatcher("home").forward(req, resp);
         }else {
             req.setAttribute("mess","Wrong User or Password !!!!");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);

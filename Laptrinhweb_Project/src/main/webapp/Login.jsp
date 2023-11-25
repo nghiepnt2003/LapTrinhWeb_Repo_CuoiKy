@@ -39,6 +39,10 @@
                 <input name="user" type="text" id="user-name" class="form-control" placeholder="User name" required="" autofocus="">
                 <input name="pass" type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
                 <input name="repass" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
+                <input name="name" type="text" id="customer-name" class="form-control" placeholder="Your name" required autofocus="">
+                <input name="phone" type="text" id="customer-phone" class="form-control" placeholder="Phone number" required autofocus="">
+                <input name="email" type="email" id="customer-mail" class="form-control" placeholder="Email" required autofocus="">
+                <input name="deliveryAddress" type="text" id="customer-deliveryAddress" class="form-control" placeholder="delivery Address" required autofocus="">
 
                 <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>

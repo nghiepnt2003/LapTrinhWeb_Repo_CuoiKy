@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name="CartLine")
 public class CartLine {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch=FetchType.EAGER)
     private Product product;

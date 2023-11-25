@@ -60,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listP}" var="o">
+                        <c:forEach items="${products}" var="o">
                             <tr>
                                 <td>
                                     <span class="custom-checkbox">
@@ -88,17 +88,15 @@
                 <div class="clearfix">
                     <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                     <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        <c:forEach begin="1" end="${totalPages}" var="i">
+                            <li class="page-item ${currentPage == i? "active":""}">
+                                <a href="manageproduct?page=${i}" onclick="selectPage(this)">${i}</a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
-            <a href="home"><button type="button" class="btn btn-primary">Back to home</button>
+            <a href="home"><button type="button" class="btn btn-primary">Back to home</button> </a>
         </div>
         <!-- Edit Modal HTML -->
         <div id="addEmployeeModal" class="modal fade">
@@ -163,5 +161,15 @@
         
         
     <script src="js/manager.js" type="text/javascript"></script>
+    <script>
+        function selectPage(element) {
+            // Loại bỏ lớp 'active' từ tất cả các liên kết trang
+            const pages = document.querySelectorAll("#pagination a");
+            pages.forEach(page => page.classList.remove("active"));
+
+            // Thêm lớp 'selected' cho trang được chọn
+            element.classList.add("active");
+        }
+    </script>
 </body>
 </html>

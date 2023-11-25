@@ -25,13 +25,32 @@ public class ManageProductServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         CategoryDB categoryDB = new CategoryDB();
-
         List<Product> productList = ProductDB.getAllProduct();
         List<Category> categoryList = categoryDB.getAllCategory();
 
         req.setAttribute("listCC",categoryList);
-
         req.setAttribute("listP",productList);
+
+
+
+        //Phân trang
+        int currentPage = 1; // Trang hiện tại
+        int recordsPerPage = 3; // Số lượng sản phẩm trên mỗi trang
+
+        if (req.getParameter("page") != null) {
+                currentPage = Integer.parseInt(req.getParameter("page"));
+        }
+        // offset là vị trí index để select trong products
+        int offset = (currentPage - 1) * recordsPerPage;
+
+        List<Product> products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
+        int totalProducts = ProductDB.getTotalProducts(); // Tổng số sản phẩm
+
+        int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
+
+        req.setAttribute("products", products);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("totalPages", totalPages);
 
         req.getRequestDispatcher("ManagerProduct.jsp").forward(req,resp);
 

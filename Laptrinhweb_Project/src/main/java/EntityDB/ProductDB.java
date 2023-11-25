@@ -112,7 +112,7 @@ public class ProductDB {
             em.close();
         }
     }
-    public static Product getProductByID(int id) {
+    public static Product getProductByID(Long id) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT p FROM Product p WHERE p.id = :id";
         TypedQuery<Product> q = em.createQuery(qString, Product.class);
@@ -122,6 +122,29 @@ public class ProductDB {
             return products;
         } catch (NoResultException e) {
             return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalProducts() {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p", Long.class);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    // Select số lượng products theo  record
+    public static List<Product> selectProductsByOffset(int offset, int recordsPerPage) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class)
+                    .setFirstResult(offset)
+                    .setMaxResults(recordsPerPage);
+            return query.getResultList();
         } finally {
             em.close();
         }
