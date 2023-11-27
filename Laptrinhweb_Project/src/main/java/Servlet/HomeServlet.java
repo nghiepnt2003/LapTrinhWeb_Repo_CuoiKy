@@ -20,6 +20,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
 
         List<Product> productList = ProductDB.getAllProduct();
         List<Category> categoryList = CategoryDB.getAllCategory();
@@ -33,6 +34,9 @@ public class HomeServlet extends HttpServlet {
             HttpSession session = req.getSession();
             // Đẩy account lên session
             session.setAttribute("cart",cart);
+            Long cartlinesCount = cart.getCartLines().stream().count();
+            req .setAttribute("cartlinecount",cartlinesCount);
+
         }
 
         req.setAttribute("listCC",categoryList);

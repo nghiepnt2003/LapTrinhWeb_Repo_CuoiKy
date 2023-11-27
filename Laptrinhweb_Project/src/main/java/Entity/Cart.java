@@ -1,4 +1,5 @@
 package Entity;
+import DBUtil.DBUtil;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ public class Cart {
 
     // Siêng năng : Truy vấn 1  đối tượng là truy vấn quan hệ ví dụ như trên sẽ truy vấn cartline
     // Lan truyền
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+//    orphanRemoval = true: Nếu một "CartLine" không còn được tham chiếu từ "Cart", nó sẽ tự động bị xóa.
     private List<CartLine> cartLines;
     @OneToOne
     private Customer customer;
@@ -66,5 +68,16 @@ public class Cart {
             }
         }
         return false;
+    }
+    public CartLine getCartLineContainsProduct(Product productToCheck) {
+        for (CartLine cartLine : cartLines) {
+            if (cartLine.getProduct().getId() == productToCheck.getId()) {
+                return cartLine;
+            }
+        }
+        return null;
+    }
+    public void removeCartLine(CartLine cartLine) {
+        cartLines.removeIf(item -> item.getId().equals(cartLine.getId()));
     }
 }

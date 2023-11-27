@@ -25,7 +25,7 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-
+        req.setCharacterEncoding("UTF-8");
         String user = req.getParameter("user");
         String pass = req.getParameter("pass");
         String repass = req.getParameter("repass");
@@ -37,7 +37,7 @@ public class SignupServlet extends HttpServlet {
             req.setAttribute("mess","Account already exists !!!!");
         }else
         if(pass.equals(repass)){
-            Account account = new Account(user,pass,true);
+            Account account = new Account(user,pass,false);
             Customer customer = new Customer(name,phone,email,deliveryAddress,account);
             CustomerDB.insert(customer);
             Cart cart = new Cart(customer);

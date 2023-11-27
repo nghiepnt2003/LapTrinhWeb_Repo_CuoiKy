@@ -51,9 +51,14 @@
                         </button>
                     </div>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="show">
+                <a class="btn btn-success btn-sm ml-3" href="showcart?customerid=${sessionScope.customer.id}">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+                    <c:if test="${sessionScope.acc != null}">
+                        <span class="badge badge-light">
+                                ${cartlinecount}
+
+                        </span>
+                    </c:if>
                 </a>
             </form>
         </div>

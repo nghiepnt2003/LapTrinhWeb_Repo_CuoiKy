@@ -21,6 +21,8 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+
         Long pid = Long.parseLong(req.getParameter("pid"));
         Product product = ProductDB.getProductByID(pid);
         ProductDB.delete(product);

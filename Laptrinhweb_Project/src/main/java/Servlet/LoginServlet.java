@@ -25,6 +25,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+
         String user = req.getParameter("user");
         String pass = req.getParameter("pass");
         Account account = AccountDB.getAccount(user,pass);

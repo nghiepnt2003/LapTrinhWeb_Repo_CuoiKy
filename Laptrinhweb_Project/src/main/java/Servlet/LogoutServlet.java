@@ -19,6 +19,7 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
         //Tạo session
         HttpSession session = req.getSession();
         // Khi Logout thì remove session "acc" trên session

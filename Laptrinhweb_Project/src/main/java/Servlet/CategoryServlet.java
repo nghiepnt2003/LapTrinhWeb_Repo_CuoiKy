@@ -23,6 +23,8 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+
         int CateID = Integer.parseInt(req.getParameter("cid"));
         ProductDB productDB = new ProductDB();
         CategoryDB categoryDB = new CategoryDB();

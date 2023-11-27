@@ -61,7 +61,7 @@
                                                         <strong>${o.quantity}</strong>
                                                         <a href="#"><button class="btnAdd">+</button></a>
                                                     </td>
-                                                    <td class="align-middle"><a href="#" class="text-dark">
+                                                    <td class="align-middle"><a href="deletecartline?customerid=${customerid}&cartlineid=${o.id}" class="text-dark">
                                                             <button type="button" class="btn btn-danger">Delete</button>
                                                         </a>
                                                     </td>
@@ -79,9 +79,9 @@
                                 <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Voucher</div>
                                 <div class="p-4">
                                     <div class="input-group mb-4 border rounded-pill p-2">
-                                        <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3" class="form-control border-0">
+                                        <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3" class="form-control border-0 voucherInput">
                                         <div class="input-group-append border-0">
-                                            <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Sử dụng</button>
+                                            <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill useVoucherButton"><i class="fa fa-gift mr-2"></i>Sử dụng</button>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                 <div class="p-4">
                                     <ul class="list-unstyled mb-4">
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng tiền hàng</strong><strong>100 $</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong></li>
+                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>5$</strong></li>
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng thanh toán</strong>
                                             <h5 class="font-weight-bold">110 $</h5>
@@ -108,6 +108,18 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            document.getElementsByClassName('useVoucherButton').addEventListener('click', function () {
+                var voucherInputValue = document.getElementsByClassName('voucherInput').value;
+                    if (voucherInputValue === 'nghiepdeptrai') {
+                    // Nếu voucher đúng, thì thay đổi phí vận chuyển thành Free Ship
+                    document.querySelector('.list-unstyled li:nth-child(2) strong:last-child').textContent = 'Free Ship';
+                } else {
+                    // Nếu voucher không đúng, thì giữ nguyên phí vận chuyển
+                    document.querySelector('.list-unstyled li:nth-child(2) strong:last-child').textContent = '30$';
+                }
+            });
+        </script>
     </body>
 
 </html>

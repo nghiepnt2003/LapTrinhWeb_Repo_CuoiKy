@@ -23,6 +23,7 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
 
         CategoryDB categoryDB = new CategoryDB();
         List<Product> productList = ProductDB.getAllProduct();
@@ -35,7 +36,7 @@ public class ManageProductServlet extends HttpServlet {
 
         //Phân trang
         int currentPage = 1; // Trang hiện tại
-        int recordsPerPage = 3; // Số lượng sản phẩm trên mỗi trang
+        int recordsPerPage = 5; // Số lượng sản phẩm trên mỗi trang
 
         if (req.getParameter("page") != null) {
                 currentPage = Integer.parseInt(req.getParameter("page"));
@@ -49,6 +50,9 @@ public class ManageProductServlet extends HttpServlet {
         int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
 
         req.setAttribute("products", products);
+        req.setAttribute("recordsPerPage", recordsPerPage);
+        req.setAttribute("totalProducts", totalProducts);
+
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
 

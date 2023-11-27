@@ -1,5 +1,6 @@
 package Entity;
 
+import DBUtil.DBUtil;
 import jakarta.persistence.*;
 
 @Entity
@@ -52,4 +53,7 @@ public class CartLine {
     public Long getId() {
         return id;
     }
+
+
+
 }

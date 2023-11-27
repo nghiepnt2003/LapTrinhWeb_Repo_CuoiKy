@@ -53,6 +53,8 @@ public class CartDB {
             em.close();
         }
     }
+
+
     public static Cart getCartByCustomer(Customer customer) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT cart FROM Cart cart WHERE cart.customer.id = :customerid";
@@ -104,4 +106,6 @@ public class CartDB {
             em.close();
         }
     }
+
+
 }

@@ -6,6 +6,7 @@ import Entity.CartLine;
 import Entity.Customer;
 import Entity.Product;
 import EntityDB.CartDB;
+import EntityDB.CartLineDB;
 import EntityDB.CustomerDB;
 import EntityDB.ProductDB;
 import jakarta.persistence.EntityManager;
@@ -40,28 +41,41 @@ public class AddtoCartServlet extends HttpServlet {
 
         // Tạo ra cartline từ sản phẩm đã chọn
         Long quantity = Long.parseLong("1");
-        CartLine cartLine = new CartLine(product,quantity);
-        // Lấy ra cart từ customer và thêm cartline vào cart
+
         Long cartID = CartDB.getCartByCustomer(customer).getId();
         //cập nhật sản phẩm theo id
         // tìm Cart theo cart ID
         Cart cart = em.find(Cart.class,cartID);
-        if(cart.getCartLines() == null)
-        {
+
+        if(cart.getCartLines() == null){
+            CartLine cartLine = new CartLine(product,quantity);
+            // phải tạo một list cartline = rỗng trước, vì khi không tạo thì nó hiểu cartlines = null không add  được
             cart.setCartLines(new ArrayList<CartLine>());
             cart.getCartLines().add(cartLine);
-        }
-        else if (cart.containsProduct(product))
+        }else
+            // Kiểm tra trong cartline của cart đã select có chứa product đó hay chưa
+        if (cart.containsProduct(product))
         {
+            // Nếu có rồi thì lấy ra cartline đó
+            CartLine cartLine = cart.getCartLineContainsProduct(product);
+            // Cộng số lượng lên 1
             cartLine.setQuantity(cartLine.getQuantity()+1);
-        }else{
-            cart.getCartLines().add(cartLine);
-            System.out.println(2);
         }
+        else // Nếu cartlinelist của cart đã select không chứa product đó
+        {
+            // Tạo ra một cartline mới từ product đó
+            CartLine cartLine = new CartLine(product,quantity);
+            // thêm cartline vào cartlineList
+            // Vì đã kiểm tra null ở trên nên không cần sợ cartlineList == null nữa
+            cart.getCartLines().add(cartLine);
+        }
+        // sau khi hoàn thành thì update cart
         CartDB.update(cart);
-
+        Long cartlinesCount = cart.getCartLines().stream().count();
+        req.setAttribute("customerid",customerID);
+        req .setAttribute("cartlinecount",cartlinesCount);
         req.setAttribute("list",cart.getCartLines());
-        req.getRequestDispatcher("Cart.jsp").forward(req,resp);
+        req.getRequestDispatcher("showcart").forward(req,resp);
     }
 
 }

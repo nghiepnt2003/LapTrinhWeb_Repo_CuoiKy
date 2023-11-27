@@ -79,14 +79,14 @@
                                 <td>${o.size}</td>
                                 <td>
                                     <a href="loadProduct?pid=${o.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="delete?pid=${o.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="deleteproduct?pid=${o.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <div class="hint-text">Showing <b>${recordsPerPage}</b> out of <b>${totalProducts}</b> entries</div>
                     <ul class="pagination">
                         <c:forEach begin="1" end="${totalPages}" var="i">
                             <li class="page-item ${currentPage == i? "active":""}">

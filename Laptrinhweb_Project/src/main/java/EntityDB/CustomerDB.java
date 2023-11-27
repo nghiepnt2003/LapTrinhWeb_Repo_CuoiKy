@@ -4,6 +4,7 @@ import DBUtil.DBUtil;
 import Entity.Account;
 import Entity.Cart;
 import Entity.Customer;
+import Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
@@ -103,5 +104,6 @@ public class CustomerDB {
             em.close();
         }
     }
+
 
 }
