@@ -51,17 +51,18 @@
                                                         <div class="p-2">
                                                             <img src="${o.product.productImage}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                                             <div class="ml-3 d-inline-block align-middle">
-                                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">${o.product.productName}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                                                <h5 class="mb-0"> <a href="detail?pid=${o.product.id}" class="text-dark d-inline-block">${o.product.productName}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
                                                             </div>
                                                         </div>
                                                     </th>
                                                     <td class="align-middle"><strong>${o.product.productCost}</strong></td>
                                                     <td class="align-middle">
-                                                        <a href="#"><button class="btnSub">-</button></a> 
+                                                        <a href="cart?action=decreateQuantity&cartlineID=${o.id}"><button class="btnSub">-</button></a>
                                                         <strong>${o.quantity}</strong>
-                                                        <a href="#"><button class="btnAdd">+</button></a>
+                                                        <a href="cart?action=increateQuantity&cartlineID=${o.id}"><button class="btnAdd">+</button></a>
                                                     </td>
-                                                    <td class="align-middle"><a href="deletecartline?customerid=${customerid}&cartlineid=${o.id}" class="text-dark">
+                                                    <td class="align-middle">
+                                                        <a href="cart?action=delete&cartlineID=${o.id}" class="text-dark">
                                                             <button type="button" class="btn btn-danger">Delete</button>
                                                         </a>
                                                     </td>

@@ -51,7 +51,7 @@
                                         <p class="btn btn-danger btn-block">${o.productCost} $</p>
                                     </div>
                                     <div class="col">
-                                        <a href="addtocart?customerid=${sessionScope.customer.id}&productID=${o.id}" class="btn btn-success btn-block">Add to cart</a>
+                                        <a href="cart?action=add&productID=${o.id}" class="btn btn-success btn-block">Add to cart</a>
                                     </div>
                                 </div>
                             </div>

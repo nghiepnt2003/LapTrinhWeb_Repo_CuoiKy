@@ -34,16 +34,22 @@ public class LoginServlet extends HttpServlet {
         if(account != null) {
             // Tạo session
             HttpSession session = req.getSession();
-            // Đẩy account lên session
+            // Đẩy acc lên session
             session.setAttribute("acc",account);
             Customer customer = CustomerDB.getCustomerByAccount(account);
             session.setAttribute("customer",customer);
             Cookie cookie = new Cookie("accountID",account.getId().toString());
+            Cookie cookie1 = new Cookie("customerID",CustomerDB.getCustomerByAccount(account).getId().toString());
+
             cookie.setMaxAge(1000);
             cookie.setPath("/");
-            resp.addCookie(cookie);
+            cookie1.setMaxAge(1000);
+            cookie1.setPath("/");
 
-            req.getRequestDispatcher("home").forward(req, resp);
+            resp.addCookie(cookie);
+            resp.addCookie(cookie1);
+
+            resp.sendRedirect("home");
         }else {
             req.setAttribute("mess","Wrong User or Password !!!!");
             req.getRequestDispatcher("Login.jsp").forward(req, resp);

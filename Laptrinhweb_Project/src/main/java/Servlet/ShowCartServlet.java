@@ -33,7 +33,7 @@ public class ShowCartServlet extends HttpServlet {
         Long cartID = CartDB.getCartByCustomer(customer).getId();
         // tìm Cart theo cart ID
         Cart cart = em.find(Cart.class,cartID);
-        //Số lượng cartline
+
         Long cartlinesCount = cart.getCartLines().stream().count();
         req.setAttribute("customerid",customerID);
         req.setAttribute("cartlineid",cartID);

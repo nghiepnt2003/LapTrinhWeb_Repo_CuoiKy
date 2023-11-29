@@ -33,6 +33,8 @@ public class HomeServlet extends HttpServlet {
             Cart cart = CartDB.getCartByCustomer(customer);
             HttpSession session = req.getSession();
             // Đẩy account lên session
+            session.setAttribute("account",account);
+            session.setAttribute("customer",customer);
             session.setAttribute("cart",cart);
             Long cartlinesCount = cart.getCartLines().stream().count();
             req .setAttribute("cartlinecount",cartlinesCount);

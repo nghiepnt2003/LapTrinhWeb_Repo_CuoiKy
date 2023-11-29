@@ -1,11 +1,9 @@
 package Servlet;
 
+import DBUtil.CookieUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
@@ -24,6 +22,8 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession();
         // Khi Logout thì remove session "acc" trên session
         session.removeAttribute("acc");
+        Cookie[] cookies = req.getCookies();
+        CookieUtil.removeCookie(cookies,"accountID");
         resp.sendRedirect("home");
     }
 }
