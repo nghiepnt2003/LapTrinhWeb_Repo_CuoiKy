@@ -21,9 +21,15 @@ public class LogoutServlet extends HttpServlet {
         //Tạo session
         HttpSession session = req.getSession();
         // Khi Logout thì remove session "acc" trên session
-        session.removeAttribute("acc");
+//        session.removeAttribute("acc");
+        session.removeAttribute("account");
+        session.removeAttribute("customer");
+        session.removeAttribute("cart");
+
         Cookie[] cookies = req.getCookies();
-        CookieUtil.removeCookie(cookies,"accountID");
+        Cookie cookie = CookieUtil.getCookie(cookies,"accountID");
+        CookieUtil.removeCookie(cookie);
+        resp.addCookie(cookie);
         resp.sendRedirect("home");
     }
 }

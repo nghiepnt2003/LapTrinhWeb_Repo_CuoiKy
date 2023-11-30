@@ -32,7 +32,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Edit <b>Product</b></h2>
+                    <h2>Edit <b>Customer</b></h2>
                 </div>
                 <div class="col-sm-6">
                 </div>
@@ -45,7 +45,7 @@
                 <form action="editcustomer" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Product</h4>
-                        <a href="manageaccount">
+                        <a href="managecustomer">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </a>
                     </div>

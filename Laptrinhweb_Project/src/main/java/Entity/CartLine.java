@@ -28,6 +28,7 @@ public class CartLine {
 
     public CartLine(Product product) {
         this.product = product;
+        this.quantity = 1L;
     }
 
     public Product getProduct() {

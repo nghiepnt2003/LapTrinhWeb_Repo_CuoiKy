@@ -39,6 +39,7 @@ public class CartDB {
             em.close();
         }
     }
+
     public static void delete(Cart cart) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -59,11 +60,11 @@ public class CartDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT cart FROM Cart cart WHERE cart.customer.id = :customerid";
         TypedQuery<Cart> q = em.createQuery(qString, Cart.class);
-        q.setParameter("customerid",customer.getId());
-        try{
+        q.setParameter("customerid", customer.getId());
+        try {
             Cart cart = q.getSingleResult();
             return cart;
-        }catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         } finally {
             em.close();
@@ -91,16 +92,17 @@ public class CartDB {
             }
         }
     }
-    public static Cart getCartByID(Long cartID){
+
+    public static Cart getCartByID(Long cartID) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT cart FROM Cart cart " +
                 "WHERE cart.id = :id";
         TypedQuery<Cart> q = em.createQuery(qString, Cart.class);
-        q.setParameter("id",cartID);
-        try{
+        q.setParameter("id", cartID);
+        try {
             Cart acc = q.getSingleResult();
             return acc;
-        }catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         } finally {
             em.close();
@@ -108,4 +110,20 @@ public class CartDB {
     }
 
 
+
+    public static Cart getCartByCartLine(CartLine cartLine) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT cart FROM Cart cart " +
+                "WHERE cart.cartLines = :cartline";
+        TypedQuery<Cart> q = em.createQuery(qString, Cart.class);
+        q.setParameter("cartline", cartLine);
+        try {
+            Cart acc = q.getSingleResult();
+            return acc;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 }

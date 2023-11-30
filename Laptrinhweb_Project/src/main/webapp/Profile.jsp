@@ -7,7 +7,6 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
@@ -27,10 +26,10 @@
     <div id="editEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="editcustomer" method="post">
+            <form action="editprofile" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Product</h4>
-                    <a href="manageaccount">
+                    <h4 class="modal-title">Profile</h4>
+                    <a href="home">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </a>
                 </div>

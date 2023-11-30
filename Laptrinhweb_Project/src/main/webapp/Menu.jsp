@@ -10,7 +10,7 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-                <c:if test="${sessionScope.acc.isAdmin()}">
+                <c:if test="${sessionScope.account.isAdmin()}">
                     <li class="nav-item">
                         <a class="nav-link" href="managecustomer">Manager Customer </a>
                     </li>
@@ -19,22 +19,22 @@
                     </li>
                 </c:if>
 
-                <c:if test="${sessionScope.acc.isAdmin() == false}">
+                <c:if test="${sessionScope.account.isAdmin() == false}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My profile</a>
+                        <a class="nav-link" href="loadProfile">My profile</a>
                     </li>
                 </c:if>
 
 
-                <c:if test="${sessionScope.acc != null}">
+                <c:if test="${sessionScope.account != null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hello ${sessionScope.customer.id} ${sessionScope.acc.userName}</a>
+                        <a class="nav-link" href="#">Hello ${sessionScope.account.userName}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout">Logout</a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.acc == null}">
+                <c:if test="${sessionScope.account == null}">
                     <li class="nav-item">
                         <a class="nav-link" href="Login.jsp">Login</a>
                     </li>
@@ -51,12 +51,11 @@
                         </button>
                     </div>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="cart?action=showcart">
+                <a class="btn btn-success btn-sm ml-3" href="Cart.jsp">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <c:if test="${sessionScope.acc != null}">
+                    <c:if test="${sessionScope.account != null}">
                         <span class="badge badge-light">
-                                ${cartlinecount}
-
+                                ${cart.countCartLine()}
                         </span>
                     </c:if>
                 </a>
@@ -66,8 +65,8 @@
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Siêu thị giày chất lượng cao</h1>
-        <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm giày nhập từ Trung Quốc</p>
+        <h1 class="jumbotron-heading">PIGN SHOES</h1>
+        <p class="lead text-muted mb-0">Chinh Phục Đỉnh Cao Thời Trang: Những Mẫu Sneaker Luxury Hàng Đầu</p>
     </div>
 </section>
 <!--end of menu-->

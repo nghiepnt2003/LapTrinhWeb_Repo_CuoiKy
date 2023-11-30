@@ -37,7 +37,7 @@ public class SignupServlet extends HttpServlet {
             req.setAttribute("mess","Account already exists !!!!");
         }else
         if(pass.equals(repass)){
-            Account account = new Account(user,pass,false);
+            Account account = new Account(user,pass,true    );
             Customer customer = new Customer(name,phone,email,deliveryAddress,account);
             CustomerDB.insert(customer);
             Cart cart = new Cart(customer);

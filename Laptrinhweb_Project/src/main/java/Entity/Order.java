@@ -15,10 +15,8 @@ public class Order {
     @ManyToOne()
     private Customer customer;
 
-    private Long totalQuantity;
-    private Date orderDate;
-    private Date deliveryData;
-    private String deliveryStatus;
+    private Double totalPrice;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 
@@ -26,13 +24,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(Customer customer, Long totalQuantity, Date orderDate, Date deliveryData, String deliveryStatus) {
+    public Order(Customer customer, Double totalPrice,List<OrderDetail> orderDetails) {
         this.customer = customer;
-        this.totalQuantity = totalQuantity;
-        this.orderDate = orderDate;
-        this.deliveryData = deliveryData;
-        this.deliveryStatus = deliveryStatus;
+        this.totalPrice = totalPrice;
         this.orderDetails = new ArrayList<OrderDetail>();
+        setDetails(orderDetails);
     }
 
     public Customer getCustomer() {
@@ -43,37 +39,6 @@ public class Order {
         this.customer = customer;
     }
 
-    public Long getTotalQuantity() {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(Long totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Date getDeliveryData() {
-        return deliveryData;
-    }
-
-    public void setDeliveryData(Date deliveryData) {
-        this.deliveryData = deliveryData;
-    }
-
-    public String getDeliveryStatus() {
-        return deliveryStatus;
-    }
-
-    public void setDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
-    }
 
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
@@ -89,6 +54,20 @@ public class Order {
 
     public Long getId() {
         return id;
+    }
+
+    private void setDetails(List<OrderDetail> orderDetails) {
+        for (var item :orderDetails) {
+            String productName = item.getProductName();
+            String brand = item.getBrand();
+            String productImage = item.getProductImage();
+            String color = item.getColor();
+            int size = item.getSize();
+            Double productCost = item.getProductCost();
+            String description = item.getDescription();
+            Long quantity = item.getQuantity();
+            this.orderDetails.add(new OrderDetail(productName, brand,productImage,color,size,productCost,description,quantity));
+        }
     }
 
 }

@@ -37,83 +37,41 @@ public class CartServlet extends HttpServlet {
             return;
         }
         String action = req.getParameter("action");
-        Cart cart = (Cart)session.getAttribute("cart");
-        if("showcart".equals(action))
-        {
-            showcart(req,cart);
-            req.getRequestDispatcher("Cart.jsp").forward(req,resp);
-
-        }else if ("add".equals(action)) {
+        Cart cart = (Cart) session.getAttribute("cart");
+        if ("add".equals(action)) {
             addToCart(req, cart);
         } else if ("delete".equals(action)) {
             deletefromcart(req, cart);
-        }else if ("increateQuantity".equals(action)){
-            increaseQuantity(req,cart);
-        }else if ("decreateQuantity".equals(action)){
-            decreaseQuantity(req,cart);;
+        } else if ("addquantity".equals(action)) {
+            addQuantity(req, cart);
+        } else if ("minusquantity".equals(action)) {
+            minusQuantity(req, cart);
         }
         CartDB.update(cart);
         String referer = req.getHeader("referer");
         resp.sendRedirect(referer);
     }
 
+
     private void addToCart(HttpServletRequest req, Cart cart) {
         Long productID = Long.parseLong(req.getParameter("productID"));
         Product product = ProductDB.getProductByID(productID);
-        Long quantity = Long.parseLong("1");
-
-        if (cart.getCartLines() == null) {
-            CartLine cartLine = new CartLine(product, quantity);
-            // phải tạo một list cartline = rỗng trước, vì khi không tạo thì nó hiểu cartlines = null không add  được
-            cart.setCartLines(new ArrayList<CartLine>());
-            cart.getCartLines().add(cartLine);
-        } else
-            // Kiểm tra trong cartline của cart đã select có chứa product đó hay chưa
-            if (cart.containsProduct(product)) {
-                // Nếu có rồi thì lấy ra cartline đó
-                CartLine cartLine = cart.getCartLineContainsProduct(product);
-                cartLine.setQuantity(cartLine.getQuantity() + 1);
-            } else // Nếu cartlinelist của cart đã select không chứa product đó
-            {
-                // Tạo ra một cartline mới từ product đó
-                CartLine cartLine = new CartLine(product, quantity);
-                // thêm cartline vào cartlineList
-                // Vì đã kiểm tra null ở trên nên  cartlineList != null
-                cart.getCartLines().add(cartLine);
-            }
-        // sau khi hoàn thành thì update cart
+        CartLine cartLine = new CartLine(product);
+        cart.addCartLine(cartLine);
     }
 
     private void deletefromcart(HttpServletRequest req, Cart cart) {
-
-        Long cartLineID = Long.parseLong(req.getParameter("cartlineID"));
-        CartLine cartLine = CartLineDB.getCartLineByID(cartLineID);
-        cart.removeCartLine(cartLine);
-        CartDB.update(cart);
-        CartLineDB.delete(cartLine);
-    }
-    private void showcart(HttpServletRequest req, Cart cart)
-    {
-        Long cartlinesCount = cart.getCartLines().stream().count();
-        req .setAttribute("cartlinecount",cartlinesCount);
-        req.setAttribute("list",cart.getCartLines());
+        Long productID = Long.parseLong(req.getParameter("productID"));
+        cart.removeCartLine(productID);
     }
 
-    private void increaseQuantity(HttpServletRequest req,Cart cart) {
-
-        Long cartLineID = Long.parseLong(req.getParameter("cartlineID"));
-        CartLine cartLine = CartLineDB.getCartLineByID(cartLineID);
-        cartLine.setQuantity(cartLine.getQuantity() + 1);
-        CartLineDB.update(cartLine);
+    private void addQuantity(HttpServletRequest req, Cart cart) {
+        Long productID = Long.parseLong(req.getParameter("productID"));
+        cart.addQuantityProduct(productID);
     }
-    private void decreaseQuantity(HttpServletRequest req,Cart cart) {
 
-        Long cartLineID = Long.parseLong(req.getParameter("cartlineID"));
-        CartLine cartLine = CartLineDB.getCartLineByID(cartLineID);
-        if(cartLine.getQuantity() > 1)
-        {
-            cartLine.setQuantity(cartLine.getQuantity() - 1);
-        }
-
+    private void minusQuantity(HttpServletRequest req, Cart cart) {
+        Long productID = Long.parseLong(req.getParameter("productID"));
+        cart.minusQuantityProduct(productID);
     }
 }

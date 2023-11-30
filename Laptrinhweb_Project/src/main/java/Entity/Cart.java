@@ -1,11 +1,13 @@
 package Entity;
+
 import DBUtil.DBUtil;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
-@Table(name="Cart")
+@Table(name = "Cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +16,7 @@ public class Cart {
 
     // Siêng năng : Truy vấn 1  đối tượng là truy vấn quan hệ ví dụ như trên sẽ truy vấn cartline
     // Lan truyền
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    orphanRemoval = true: Nếu một "CartLine" không còn được tham chiếu từ "Cart", nó sẽ tự động bị xóa.
     private List<CartLine> cartLines;
     @OneToOne
@@ -61,23 +63,46 @@ public class Cart {
                 '}';
     }
 
-    public boolean containsProduct(Product productToCheck) {
-        for (CartLine cartLine : cartLines) {
-            if (cartLine.getProduct().getId() == productToCheck.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public CartLine getCartLineContainsProduct(Product productToCheck) {
-        for (CartLine cartLine : cartLines) {
-            if (cartLine.getProduct().getId() == productToCheck.getId()) {
-                return cartLine;
-            }
-        }
-        return null;
-    }
+
     public void removeCartLine(CartLine cartLine) {
         cartLines.removeIf(item -> item.getId().equals(cartLine.getId()));
+    }
+
+    public void removeCartLine(Long productID) {
+        cartLines.removeIf(item -> item.getProduct().getId().equals(productID));
+    }
+
+    public int countCartLine() {
+        return cartLines.size();
+    }
+
+    public void addCartLine(CartLine cartLine) {
+        for (var item : cartLines) {
+            if (item.getProduct().getId().equals(cartLine.getProduct().getId())) {
+                item.setQuantity(item.getQuantity() + 1);
+                return;
+            }
+        }
+        cartLines.add(cartLine);
+    }
+
+    public void addQuantityProduct(Long productID) {
+        for (var item : cartLines) {
+            if (item.getProduct().getId().equals(productID)) {
+                item.setQuantity(item.getQuantity() + 1);
+                return;
+            }
+        }
+    }
+
+    public void minusQuantityProduct(Long productID) {
+        for (var item : cartLines) {
+            if (item.getProduct().getId().equals(productID)) {
+                if (item.getQuantity() > 1) {
+                    item.setQuantity(item.getQuantity() - 1);
+                }
+                return;
+            }
+        }
     }
 }

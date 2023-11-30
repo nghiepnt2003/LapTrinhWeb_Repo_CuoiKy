@@ -70,6 +70,21 @@ public class CartLineDB {
             em.close();
         }
     }
+    public static List<CartLine> getCartLinesByProductID(Long productID)
+    {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT cartline FROM CartLine cartline WHERE cartline.product.id = :pid";
+        TypedQuery<CartLine> q = em.createQuery(qString, CartLine.class);
+        q.setParameter("pid",productID);
+        try {
+            List<CartLine> cartLines = q.getResultList();
+            return cartLines;
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
 
 }

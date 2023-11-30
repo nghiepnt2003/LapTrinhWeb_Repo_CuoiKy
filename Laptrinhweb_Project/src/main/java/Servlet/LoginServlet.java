@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             // Tạo session
             HttpSession session = req.getSession();
             // Đẩy acc lên session
-            session.setAttribute("acc",account);
+            session.setAttribute("account",account);
             Customer customer = CustomerDB.getCustomerByAccount(account);
             session.setAttribute("customer",customer);
             Cookie cookie = new Cookie("accountID",account.getId().toString());

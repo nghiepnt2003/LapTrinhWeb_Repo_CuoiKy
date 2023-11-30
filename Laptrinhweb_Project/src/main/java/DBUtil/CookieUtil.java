@@ -14,7 +14,11 @@ public class CookieUtil {
         }
         return cookieValue;
     }
-
+    public static void removeCookie(Cookie cookie) {
+        cookie.setValue("");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+    }
     public static Cookie getCookie(Cookie[] cookies, String cookieName) {
         if (cookies != null) {
             for (Cookie cookie : cookies) {

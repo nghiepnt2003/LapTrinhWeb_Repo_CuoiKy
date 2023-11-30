@@ -36,8 +36,6 @@ public class HomeServlet extends HttpServlet {
             session.setAttribute("account",account);
             session.setAttribute("customer",customer);
             session.setAttribute("cart",cart);
-            Long cartlinesCount = cart.getCartLines().stream().count();
-            req .setAttribute("cartlinecount",cartlinesCount);
 
         }
 

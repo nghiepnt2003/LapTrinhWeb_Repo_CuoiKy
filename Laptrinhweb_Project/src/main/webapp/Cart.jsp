@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,7 +47,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="o">
+                                            <c:set var="totalAmount" value="0" />
+                                            <c:set var="VAT" value="5" />
+
+                                            <c:forEach items="${cart.cartLines}" var="o">
                                                 <tr>
                                                     <th scope="row">
                                                         <div class="p-2">
@@ -57,16 +62,19 @@
                                                     </th>
                                                     <td class="align-middle"><strong>${o.product.productCost}</strong></td>
                                                     <td class="align-middle">
-                                                        <a href="cart?action=decreateQuantity&cartlineID=${o.id}"><button class="btnSub">-</button></a>
+                                                        <a href="cart?action=minusquantity&productID=${o.product.id}"><button class="btnSub">-</button></a>
                                                         <strong>${o.quantity}</strong>
-                                                        <a href="cart?action=increateQuantity&cartlineID=${o.id}"><button class="btnAdd">+</button></a>
+                                                        <a href="cart?action=addquantity&productID=${o.product.id}"><button class="btnAdd">+</button></a>
                                                     </td>
                                                     <td class="align-middle">
-                                                        <a href="cart?action=delete&cartlineID=${o.id}" class="text-dark">
+                                                        <a href="cart?action=delete&productID=${o.product.id}" class="text-dark">
                                                             <button type="button" class="btn btn-danger">Delete</button>
                                                         </a>
                                                     </td>
-                                                </tr> 
+                                                </tr>
+                                                <!-- Calculate and update total amount for each cart line -->
+                                                <c:set var="lineTotal" value="${o.product.productCost * o.quantity}" />
+                                                <c:set var="totalAmount" value="${totalAmount + lineTotal}" />
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -76,28 +84,21 @@
                         </div>
 
                         <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                            <div class="col-lg-6">
-                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Voucher</div>
-                                <div class="p-4">
-                                    <div class="input-group mb-4 border rounded-pill p-2">
-                                        <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3" class="form-control border-0 voucherInput">
-                                        <div class="input-group-append border-0">
-                                            <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill useVoucherButton"><i class="fa fa-gift mr-2"></i>Sử dụng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thành tiền</div>
+
+                            <div class="col-lg-12">
+                                <div style="text-align: center;font-size: 1.6em" class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thành tiền</div>
                                 <div class="p-4">
                                     <ul class="list-unstyled mb-4">
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng tiền hàng</strong><strong>100 $</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>5$</strong></li>
-                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>
+                                        <fmt:formatNumber value="${totalAmount}" pattern="#,##0.00" var="roundTotalAmount" />
+                                        <c:set var="totalToPay" value="${totalAmount + VAT}" />
+                                        <fmt:formatNumber value="${totalToPay}" pattern="#,##0.00" var="roundTotalToPay" />
+
+                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng tiền hàng</strong><strong>${roundTotalAmount} $</strong></li>
+                                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>${VAT} $</strong></li>
                                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng thanh toán</strong>
-                                            <h5 class="font-weight-bold">110 $</h5>
+                                            <h5 class="font-weight-bold">${roundTotalToPay} $</h5>
                                         </li>
-                                    </ul><a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Mua hàng</a>
+                                    </ul><a href="order?action=add&totalPrice=${roundTotalToPay}" class="btn btn-dark rounded-pill py-2 btn-block">Mua hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -110,16 +111,29 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-            document.getElementsByClassName('useVoucherButton').addEventListener('click', function () {
-                var voucherInputValue = document.getElementsByClassName('voucherInput').value;
-                    if (voucherInputValue === 'nghiepdeptrai') {
-                    // Nếu voucher đúng, thì thay đổi phí vận chuyển thành Free Ship
-                    document.querySelector('.list-unstyled li:nth-child(2) strong:last-child').textContent = 'Free Ship';
-                } else {
-                    // Nếu voucher không đúng, thì giữ nguyên phí vận chuyển
-                    document.querySelector('.list-unstyled li:nth-child(2) strong:last-child').textContent = '30$';
-                }
-            });
+            // const buttonVoucher = document.querySelector(".useVoucherButton");
+            // buttonVoucher.addEventListener("click",applyVoucher);
+            // function applyVoucher() {
+            //     var voucherInput = document.querySelector(".voucherInput");
+            //     if (voucherInput.value.toLowerCase() === 'freeship') {
+            //         $.ajax({
+            //             type: "POST",
+            //             url: "cart?action=updateShipFee",
+            //             data: { shipfee: 0 },
+            //             success: function (data) {
+            //                 // Reload the page to reflect the updated shipfee
+            //                 location.reload();
+            //             },
+            //             error: function () {
+            //                 alert('Error updating shipping fee');
+            //             }
+            //         });
+            //
+            //     } else {
+            //         // Handle other voucher logic if needed
+            //         alert('Invalid voucher');
+            //     }
+            // }
         </script>
     </body>
 
