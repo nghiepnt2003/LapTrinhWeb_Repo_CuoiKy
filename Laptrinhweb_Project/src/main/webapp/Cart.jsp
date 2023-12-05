@@ -56,7 +56,7 @@
                                                         <div class="p-2">
                                                             <img src="${o.product.productImage}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                                             <div class="ml-3 d-inline-block align-middle">
-                                                                <h5 class="mb-0"> <a href="product?action=detail?pid=${o.product.id}" class="text-dark d-inline-block">${o.product.productName}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                                                <h5 class="mb-0"> <a href="product?action=detail&pid=${o.product.id}" class="text-dark d-inline-block">${o.product.productName}</a></h5><span class="text-muted font-weight-normal font-italic"></span>
                                                             </div>
                                                         </div>
                                                     </th>

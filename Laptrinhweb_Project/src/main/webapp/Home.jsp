@@ -28,7 +28,7 @@
                         <div class="card">
                             <img class="card-img-top" src="${o.productImage}" alt="Card image cap">
                             <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?pid=${o.id}" title="View Product">${o.productName}</a></h4>
+                                <h4 class="card-title show_txt"><a href="product?action=detail&pid=${o.id}" title="View Product">${o.productName}</a></h4>
                                 <p class="card-text show_txt">${o.description}</p>
                                 <p class="card-text show_txt"> Brand : ${o.brand}</p>
                                 <p class="card-text show_txt"> Color : ${o.color}</p>

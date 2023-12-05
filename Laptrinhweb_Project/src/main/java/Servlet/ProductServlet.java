@@ -49,7 +49,7 @@ public class ProductServlet extends HttpServlet {
         } else if ("detail".equals(action)) {
             detailProduct(req);
             req.getRequestDispatcher("Detail.jsp").forward(req, resp);
-
+            return;
         }
         resp.sendRedirect("manageproduct");
     }
