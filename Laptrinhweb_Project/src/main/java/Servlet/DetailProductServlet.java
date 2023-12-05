@@ -30,7 +30,6 @@ public class DetailProductServlet extends HttpServlet {
         List<Category> categoryList = categoryDB.getAllCategory();
         Product productLast = productDB.getLastProduct();
         Product product = productDB.getProductByID(pid);
-
         req.setAttribute("detail",product);
         req.setAttribute("listCC",categoryList);
         req.setAttribute("productLast",productLast);

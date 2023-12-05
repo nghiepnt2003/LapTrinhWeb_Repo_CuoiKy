@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name="OrderDetail")
 public class OrderDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String productName;
     private String brand;

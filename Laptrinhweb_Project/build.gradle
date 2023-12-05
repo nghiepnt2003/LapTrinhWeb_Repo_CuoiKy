@@ -25,6 +25,7 @@ dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
     implementation('org.eclipse.persistence:org.eclipse.persistence.jpa:3.0.2')
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0")
+    implementation("com.sun.mail:javax.mail:1.6.2")
     implementation("org.postgresql:postgresql:42.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

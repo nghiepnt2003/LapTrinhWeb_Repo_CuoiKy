@@ -42,7 +42,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="editproduct" method="post">
+                        <form action="product?action=edit" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Edit Product</h4>
                                 <a href="manageproduct">

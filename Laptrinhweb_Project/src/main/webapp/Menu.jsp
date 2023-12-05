@@ -17,11 +17,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="manageproduct">Manager Product</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order?action=manage">Manager Order</a>
+                    </li>
                 </c:if>
 
                 <c:if test="${sessionScope.account.isAdmin() == false}">
                     <li class="nav-item">
                         <a class="nav-link" href="loadProfile">My profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order?action=myOrder">My Order</a>
                     </li>
                 </c:if>
 
@@ -51,21 +57,23 @@
                         </button>
                     </div>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="Cart.jsp">
-                    <i class="fa fa-shopping-cart"></i> Cart
-                    <c:if test="${sessionScope.account != null}">
-                        <span class="badge badge-light">
-                                ${cart.countCartLine()}
-                        </span>
-                    </c:if>
-                </a>
+                <c:if test="${!sessionScope.account.isAdmin()}">
+                    <a class="btn btn-success btn-sm ml-3" href="Cart.jsp">
+                        <i class="fa fa-shopping-cart"></i> Cart
+                        <c:if test="${sessionScope.account != null}">
+                            <span class="badge badge-light">
+                                    ${cart.countCartLine()}
+                            </span>
+                        </c:if>
+                    </a>
+                </c:if>
             </form>
         </div>
     </div>
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">PIGN SHOES</h1>
+        <h1 class="jumbotron-heading">SHOES STORE</h1>
         <p class="lead text-muted mb-0">Chinh Phục Đỉnh Cao Thời Trang: Những Mẫu Sneaker Luxury Hàng Đầu</p>
     </div>
 </section>

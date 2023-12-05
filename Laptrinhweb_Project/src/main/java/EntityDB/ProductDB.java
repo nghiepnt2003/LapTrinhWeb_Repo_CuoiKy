@@ -86,9 +86,9 @@ public class ProductDB {
     }
     public static List<Product> getProductsByName(String pname) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT p FROM Product p WHERE p.productName like :name ";
+        String qString = "SELECT p FROM Product p WHERE lower(p.productName)  like :name ";
         TypedQuery<Product> q = em.createQuery(qString, Product.class);
-        q.setParameter("name","%" + pname + "%");// Thêm dấu % vào giá trị của tham số
+        q.setParameter("name","%" + pname.toLowerCase() + "%");// Thêm dấu % vào giá trị của tham số
         try {
             List<Product> products = q.getResultList();
             return products;

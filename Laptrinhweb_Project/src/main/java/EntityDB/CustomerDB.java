@@ -106,4 +106,15 @@ public class CustomerDB {
     }
 
 
+    public static Customer select(String email) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Customer> query = em.createQuery("SELECT cus FROM Customer cus WHERE cus.mail = :email", Customer.class);
+        query.setParameter("email", email);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

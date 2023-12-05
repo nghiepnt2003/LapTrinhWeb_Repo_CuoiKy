@@ -1,5 +1,6 @@
 package Servlet;
 
+import Entity.Account;
 import Entity.Category;
 import Entity.Product;
 import EntityDB.CategoryDB;
@@ -9,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +26,6 @@ public class ManageProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
-
         CategoryDB categoryDB = new CategoryDB();
         List<Product> productList = ProductDB.getAllProduct();
         List<Category> categoryList = categoryDB.getAllCategory();
@@ -52,7 +53,6 @@ public class ManageProductServlet extends HttpServlet {
         req.setAttribute("products", products);
         req.setAttribute("recordsPerPage", recordsPerPage);
         req.setAttribute("totalProducts", totalProducts);
-
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
 

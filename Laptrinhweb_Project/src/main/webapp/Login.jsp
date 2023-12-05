@@ -43,6 +43,12 @@
                 <input name="phone" type="text" id="customer-phone" class="form-control" placeholder="Phone number" required autofocus="">
                 <input name="email" type="email" id="customer-mail" class="form-control" placeholder="Email" required autofocus="">
                 <input name="deliveryAddress" type="text" id="customer-deliveryAddress" class="form-control" placeholder="delivery Address" required autofocus="">
+            <%--                --%>
+                <div id="spinner"></div>
+                <input name="otp" type="text" id="otpInput" placeholder="EnterOTP"   required autofocus>
+                <button type="button" onclick="sendOtp()">Send OTP</button>
+                <div id="message"></div>
+            <%--                --%>
 
                 <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
                 <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
@@ -73,5 +79,7 @@
                 $('#logreg-forms #cancel_signup').click(toggleSignUp);
             })
         </script>
+        <script src="./js/SignUp.js"></script>
+
     </body>
 </html>

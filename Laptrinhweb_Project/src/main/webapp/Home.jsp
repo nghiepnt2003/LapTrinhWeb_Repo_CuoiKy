@@ -16,19 +16,7 @@
 </head>
 <body>
 <jsp:include page="Menu.jsp"></jsp:include>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="home">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="#">Sub-category</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
+
 <div class="container">
     <div class="row">
         <jsp:include page="Left.jsp"></jsp:include>
@@ -48,7 +36,7 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${o.productCost} $</p>
+                                        <a href="order?action=addnow&productID=${o.id}&totalPrice=${o.productCost+5}" class="btn btn-danger btn-block">${o.productCost} $</a>
                                     </div>
                                     <div class="col">
                                         <a href="cart?action=add&productID=${o.id}" class="btn btn-success btn-block">Add to cart</a>
